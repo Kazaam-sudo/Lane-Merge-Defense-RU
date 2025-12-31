@@ -5,6 +5,7 @@ import { generateEnemy, getNextCost } from './services/gameLogic';
 import { playSpawnSound, playMergeSound, playShootSound, playHitSound, playDeathSound, playGameOverSound, playBonusSound, playBombSound } from './services/audio';
 import { GridSlot } from './components/GridSlot';
 import { GameOverlay } from './components/GameOverlay';
+import { EnemySkin, UnitSkin } from './components/Skins';
 
 export default function App() {
   // --- STATE ---
@@ -645,16 +646,9 @@ export default function App() {
                   }}
                   onClick={(e) => handleEnemyClick(enemy, e)}
                 >
-                   <div className="relative animate-float w-full flex flex-col items-center">
-                      <div 
-                         className={`
-                           text-4xl filter drop-shadow-[0_0_10px_rgba(255,255,255,0.4)] z-10 
-                           ${enemy.type === 'boss' ? 'scale-150' : ''}
-                           ${isBonus ? 'animate-pulse scale-125' : ''}
-                         `}
-                      >
-                        {enemy.icon}
-                      </div>
+                   <div className="relative animate-float w-full h-full flex flex-col items-center">
+                      <EnemySkin type={enemy.type} className={`w-full h-full ${enemy.type === 'boss' ? 'scale-125' : ''}`} />
+
                       {!isBonus && (
                           <div className="w-full h-1.5 bg-gray-800/90 rounded-full mt-1 border border-gray-600/50 overflow-hidden shadow-sm">
                             <div 
@@ -734,14 +728,14 @@ export default function App() {
       {/* 4. DRAGGED ITEM GHOST */}
       {dragState.activeId && (
         <div 
-          className="fixed pointer-events-none z-50 text-5xl filter drop-shadow-2xl opacity-90 scale-125"
+          className="fixed pointer-events-none z-50 w-20 h-20 opacity-90 scale-125"
           style={{ 
             left: dragState.currentX, 
             top: dragState.currentY,
             transform: 'translate(-50%, -50%)'
           }}
         >
-          {grid[dragState.startIndex!] ? UNIT_STATS[grid[dragState.startIndex!]!.level].icon : ''}
+          {grid[dragState.startIndex!] && <UnitSkin level={grid[dragState.startIndex!]!.level} />}
         </div>
       )}
 

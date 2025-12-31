@@ -15,7 +15,6 @@ export interface UnitConfig {
   damage: number;
   cooldownMs: number; // Fire rate
   projectileSpeed: number;
-  icon: string;
   name: string;
   color: string;
   description?: string;
@@ -36,7 +35,6 @@ export interface Enemy {
   maxHp: number;
   speed: number;
   type: 'normal' | 'fast' | 'boss' | 'bonus_bomb' | 'bonus_upgrade' | 'bonus_unit';
-  icon: string;
   frozen?: boolean;
 }
 
