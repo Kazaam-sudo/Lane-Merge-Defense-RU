@@ -18,6 +18,7 @@ export interface UnitConfig {
   name: string;
   color: string;
   description?: string;
+  multiLane?: boolean; // New ability
 }
 
 export interface UnitInstance {
@@ -34,6 +35,7 @@ export interface Enemy {
   hp: number;
   maxHp: number;
   speed: number;
+  level: number; // New enemy level property
   type: 'normal' | 'fast' | 'boss' | 'bonus_bomb' | 'bonus_upgrade' | 'bonus_unit';
   frozen?: boolean;
 }
@@ -77,4 +79,22 @@ export interface TooltipData {
   y: number;
   title: string;
   content: string;
+}
+
+// --- Persistence ---
+export interface Achievement {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+}
+
+export interface PlayerProgress {
+  maxUnlockedLevel: number;
+  unlockedAchievements: string[];
+  stats: {
+    totalKills: number;
+    totalMerges: number;
+    gamesPlayed: number;
+  }
 }
